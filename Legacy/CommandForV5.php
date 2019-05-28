@@ -11,6 +11,8 @@
 
 namespace Symfony\Bridge\PhpUnit\Legacy;
 
+use PHPUnit\Util\Configuration;
+
 /**
  * {@inheritdoc}
  *
@@ -37,8 +39,8 @@ class CommandForV5 extends \PHPUnit_TextUI_Command
 
         if (isset($this->arguments['configuration'])) {
             $configuration = $this->arguments['configuration'];
-            if (!($configuration instanceof PHPUnit_Util_Configuration)) {
-                $configuration = PHPUnit_Util_Configuration::getInstance($this->arguments['configuration']);
+            if (!($configuration instanceof Configuration)) {
+                $configuration = Configuration::getInstance($this->arguments['configuration']);
             }
             foreach ($configuration->getListenerConfiguration() as $registeredListener) {
                 if (is_subclass_of($registeredListener['class'], SymfonyTestsListenerForV5::class)) {
