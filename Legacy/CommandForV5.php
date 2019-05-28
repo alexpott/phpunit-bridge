@@ -41,11 +41,11 @@ class CommandForV5 extends \PHPUnit_TextUI_Command
                 $configuration = \PHPUnit_Util_Configuration::getInstance($this->arguments['configuration']);
             }
             foreach ($configuration->getListenerConfiguration() as $registeredListener) {
-                if (is_subclass_of($registeredListener['class'], SymfonyTestsListenerForV5::class)) {
-                    $registeredListener->globalListenerDisabled();
+                if (ltrim($registeredListener['class'], '\\') === ltrim(SymfonyTestsListenerForV5::class, '\\')) {
                     $registeredLocally = true;
                     break;
                 }
+
             }
         }
 
